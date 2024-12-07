@@ -116,9 +116,9 @@ public class MenuDialogs
     private void QuitApp()
     {
         Console.Clear();
-        Console.WriteLine("Do you want to quit? (Y/N): ");
+        //Console.WriteLine("Do you want to quit? (Y/N): ");
         //Provar Output, vet ej om det funkar, annars kör ovanstående. 
-        //OutputDialog("Do you want to quit? (Y/N): ");
+        OutputDialog("Do you want to quit? (Y/N): ");
         var option = Console.ReadLine()!;
         if (option.Equals("y", StringComparison.CurrentCultureIgnoreCase))
         {
@@ -133,9 +133,7 @@ public class MenuDialogs
     /* VILL HA EGEN METOD FÖR OUTPUT-MESSAGES, MINNS EJ HUR MAN GÖR, LÄGG TILL SENARE*/
     private void OutputDialog(string message)
     {
-        Console.Clear();
+        //Console.Clear();
         Console.WriteLine(message);
-        Console.ReadKey();
     }
-    
 }
