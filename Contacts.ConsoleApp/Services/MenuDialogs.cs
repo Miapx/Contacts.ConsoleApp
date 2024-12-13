@@ -1,27 +1,34 @@
-﻿using Contacts.ConsoleApp.Models;
+﻿using Business.Models;
+using Business.Services;
 
 namespace Contacts.ConsoleApp.Services;
 
 public class MenuDialogs
 {
-    private readonly ContactService _contactService = new();
+    private readonly IFileService _fileService;
+    private readonly IContactService _contactService;
 
+    public MenuDialogs()
+    {
+        _fileService = new FileService();
+        _contactService = new ContactService(_fileService);
+    }
+
+
+    //Metod för att köra menyn vid start
     public void Show()
     {
-        while (true) 
+        while (true)
         {
             MainMenu();
         }
     }
 
-
-
-
     private void MainMenu()
     {
         Console.Clear();
         Console.WriteLine("---------MAIN MENU---------");
-        Console.WriteLine($"{"1.", -5} Add new contact");
+        Console.WriteLine($"{"1.",-5} Add new contact");
         Console.WriteLine($"{"2.",-5} View all contacts");
         Console.WriteLine($"{"Q.",-5} Quit App");
 
@@ -49,7 +56,7 @@ public class MenuDialogs
         }
     }
 
-    private void AddContact()
+    public void AddContact()
     {
         Console.Clear();
         Console.WriteLine("------ADD CONTACT-------");
@@ -76,6 +83,7 @@ public class MenuDialogs
         Console.Write("Enter your city: ");
         contact.City = Console.ReadLine()!;
 
+        //Skickar contact till CreateContact för att lägga till i listan som en ContactModel
         _contactService.CreateContact(contact);
 
         Console.WriteLine("Contact was added to the list");
@@ -87,7 +95,7 @@ public class MenuDialogs
     {
         Console.Clear();
 
-
+        //Hämtar listan från ContactService.GetAllContacts()
         var contacts = _contactService.GetAllContacts();
         if (!contacts.Any())
         {
@@ -95,6 +103,7 @@ public class MenuDialogs
             Console.ReadKey();
             return;
         }
+        //Skriver ut listan i en loop om den inte är tom.
         else
         {
             foreach (var contact in contacts)
@@ -106,34 +115,27 @@ public class MenuDialogs
                 Console.WriteLine($"{"Street name:",-15}{contact.StreetAdress}");
                 Console.WriteLine($"{"Postal code:",-15}{contact.PostalCode}");
                 Console.WriteLine($"{"City:",-15}{contact.City}");
+                Console.WriteLine("----------------------------------------------------------------");
 
             }
             Console.ReadKey();
         }
     }
-    
-
     private void QuitApp()
     {
         Console.Clear();
-        //Console.WriteLine("Do you want to quit? (Y/N): ");
-        //Provar Output, vet ej om det funkar, annars kör ovanstående. 
         OutputDialog("Do you want to quit? (Y/N): ");
         var option = Console.ReadLine()!;
+
+        //Jämför option med y, ignorerar stor/liten bokstav, stänger programmet om de stämmer överens
         if (option.Equals("y", StringComparison.CurrentCultureIgnoreCase))
         {
             Environment.Exit(0);
         }
     }
 
-
-
-
-
-    /* VILL HA EGEN METOD FÖR OUTPUT-MESSAGES, MINNS EJ HUR MAN GÖR, LÄGG TILL SENARE*/
     private void OutputDialog(string message)
     {
-        //Console.Clear();
         Console.WriteLine(message);
     }
 }

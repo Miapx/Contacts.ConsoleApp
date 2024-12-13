@@ -1,4 +1,4 @@
-﻿namespace Contacts.ConsoleApp.Models;
+﻿namespace Business.Models;  
 
 public class ContactModel
 {
