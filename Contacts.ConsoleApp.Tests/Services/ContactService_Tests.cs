@@ -18,8 +18,8 @@ public class ContactService_Tests
 
 
     [Fact]
-
-    //Ska kollar om listan är tom och KANSKE om det är en lista (tror inte det funkar)
+    //GetAllContacts_ShouldReturnAnEmptyList detta enkla test är okej för godkänt
+    //Testet kollar om metoden returnerar en tom lista av typen ContactModel
     public void GetAllContacts_ShouldReturnAnEmptyList()
     {
         //Arrange
@@ -31,12 +31,13 @@ public class ContactService_Tests
         //Assert
         Assert.NotNull(result);
         Assert.IsAssignableFrom<IEnumerable<ContactModel>>(result);
+        Assert.Empty(result);
 
     }
 
+
     [Fact]
 
-    //Ska kollar om listan är tom och KANSKE om det är en lista (tror inte det funkar)
     public void GetAllContacts_ShouldReturnAListWithContacts()
     {
         //Arrange

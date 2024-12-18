@@ -4,7 +4,6 @@ namespace Business.Services;
 
 public class ContactService : IContactService
 {
-    //Skapar nya instanser av FileService och ContactModel
     private readonly IFileService _fileService;
 
     public ContactService(IFileService fileService)

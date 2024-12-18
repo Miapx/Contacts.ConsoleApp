@@ -87,7 +87,6 @@ public class MenuDialogs
         _contactService.CreateContact(contact);
 
         Console.WriteLine("Contact was added to the list");
-
         Console.ReadKey();
     }
 

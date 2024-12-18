@@ -4,5 +4,6 @@
     {
         string? GetContentFromFile();
         void SaveContentToFile(string content);
+        void ClearFile();
     }
 }

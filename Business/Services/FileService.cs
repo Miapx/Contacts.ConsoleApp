@@ -17,8 +17,9 @@ public class FileService : IFileService
     public void SaveContentToFile(string content)
     {
         if (string.IsNullOrEmpty(content))
-            if (!Directory.Exists(_directoryPath))
-                Directory.CreateDirectory(_directoryPath);
+            return;
+        if (!Directory.Exists(_directoryPath))
+            Directory.CreateDirectory(_directoryPath);
 
 
         File.WriteAllText(_filePath, content);
@@ -30,5 +31,11 @@ public class FileService : IFileService
         if (File.Exists(_filePath))
             return File.ReadAllText(_filePath);
         return null;
+    }
+
+    public void ClearFile()
+    {
+        if (File.Exists(_filePath))
+            File.Delete(_filePath);
     }
 }
