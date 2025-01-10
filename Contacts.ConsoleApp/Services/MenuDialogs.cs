@@ -30,6 +30,7 @@ public class MenuDialogs
         Console.WriteLine("---------MAIN MENU---------");
         Console.WriteLine($"{"1.",-5} Add new contact");
         Console.WriteLine($"{"2.",-5} View all contacts");
+        Console.WriteLine($"{"3.",-5} Remove all contacts");
         Console.WriteLine($"{"Q.",-5} Quit App");
 
         Console.Write("Choose your menu option: ");
@@ -43,6 +44,10 @@ public class MenuDialogs
 
             case "2":
                 ViewContacts();
+                break;
+
+                case "3":
+                ClearList();
                 break;
 
             case "q":
@@ -120,6 +125,22 @@ public class MenuDialogs
             Console.ReadKey();
         }
     }
+
+    //ClearList rensar listan men uppdaterar inte förrän programmet startats om. 
+    private void ClearList()
+    {
+        Console.WriteLine("Do you want to remove all contacts from the list? Y/N ");
+        var option = Console.ReadLine()!;
+        if (option.Equals("y", StringComparison.CurrentCultureIgnoreCase))
+        {
+            _fileService.ClearFile();
+        }
+        else
+        {
+            return;
+        }
+    }
+     
     private void QuitApp()
     {
         Console.Clear();
